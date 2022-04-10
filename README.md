@@ -1,31 +1,30 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Hungry Snake
 
-Welcome USER_NAME,
+## Project Overview
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+Hungry Snake - The classic mobile game makes it's way to the Python Command Line Interface!! Control the snake to eat food and grow as big as you can to earn more points. The game is over if the snake runs into the edge of the screen or eats it's own tail!
 
-## Reminders
+## Project Goals and Target Audience
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+Hungry Snake is intended to be picked up and played by anyone! The aim of the game is to move the snake around the board and collect food. As the snake eats food, it becomes bigger and the user's score is increased. The game will end if the snake runs into the edge of the board or it it eats it's own tail. The game features multiple levels of difficulty to challenge players of all levels.
 
-## Creating the Heroku app
+## Coding Languages Used
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+1. Python
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## Features
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+### Existing Features
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+### Future Features
 
-Connect your GitHub repository and deploy as normal.
+## Testing
 
-## Constraints
+## Bugs and Fixes
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+## Deployment
 
------
-Happy coding!
+## Credits
+
+### Code Used
+- Credit to YouTube user Python Engineer and their video [Snake Game in Python - Python Beginner Tutorial](https://www.youtube.com/watch?v=M_npdRYD4K0) for code used to create the game window using the "curses" module.
