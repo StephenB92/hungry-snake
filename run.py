@@ -3,13 +3,28 @@ The curses module is used to handle user keypresses,
 allowing them to move the snake
 """
 import curses
+from curses import textpad
 
 # Create window
 
-curses.initscr()
-win = curses.newwin(20, 60, 0, 0)
-win.keypad(1)
-curses.noecho()
-curses.curs_set(0)
-win.border(0)
-win.nodelay(1)
+
+def main(stdscr):
+    """
+    Code to create the game board
+    """
+    curses.curs_set(0)
+    sh, sw = stdscr.getmaxyx()
+    box = [[3, 3], [sh-3, sw-3]]
+    textpad.rectangle(stdscr, box[0][0], box[0][1], box[1][0], box[1][1])
+    stdscr.refresh()
+    stdscr.getch()
+
+# Snake
+
+# Food
+
+# Keeping Score
+
+# Game Over
+
+# Difficulty Levels

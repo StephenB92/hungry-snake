@@ -12,6 +12,10 @@ Hungry Snake is intended to be picked up and played by anyone! The aim of the ga
 
 1. Python
 
+## Wireframes
+
+1. Please wireframe for the game on initialisation [here](assets/wireframes/start-of-game.png).
+
 ## Features
 
 ### Existing Features
@@ -27,4 +31,4 @@ Hungry Snake is intended to be picked up and played by anyone! The aim of the ga
 ## Credits
 
 ### Code Used
-- Credit to YouTube user Python Engineer and their video [Snake Game in Python - Python Beginner Tutorial](https://www.youtube.com/watch?v=M_npdRYD4K0) for code used to create the game window using the "curses" module.
+- Credit to YouTube user Indian Pythonista and their video [Creating Snake Game for Terminal | Intro to curses in Python (Part-3)](https://www.youtube.com/watch?v=BvbqI6eDh0c&list=WL&index=4) for code used to create the game window using the "curses" module.
