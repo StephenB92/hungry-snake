@@ -18,7 +18,6 @@ def main(stdscr):
     height, width = stdscr.getmaxyx()
     box = [[3, 3], [height-3, width-3]]
     textpad.rectangle(stdscr, box[0][0], box[0][1], box[1][0], box[1][1])
-
     # Defining the snake variable and positioning in center of screen
     snake = [[height // 2, width // 2 + 1], [height // 2, width // 2],
              [height // 2, width // 2 - 1]]
@@ -58,6 +57,17 @@ def main(stdscr):
 
         stdscr.addstr(snake[-1][0], snake[-1][1], ' ')
         snake.pop()
+
+        # Logic for Game Over conditions
+        if (snake[0][0] in [box[0][0], box[1][0]] or
+            snake[0][1] in [box[0][1], box[1][1]] or
+                snake[0] in snake[1:]):
+            game_over = "Oops!! Watch where you're going next time!"
+            stdscr.addstr(height // 2, width // 2
+                          - len(game_over) // 2, game_over)
+            stdscr.nodelay(0)
+            stdscr.getch()
+            break
 
         stdscr.refresh()
 
