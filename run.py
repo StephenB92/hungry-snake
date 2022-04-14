@@ -1,11 +1,27 @@
 """
 The curses module is used to handle user keypresses,
-allowing them to move the snake
+allowing them to move the snake and the  random module
+is used to randomly generate where food will appear
 """
 import curses
 from curses import textpad
+import random
 
 PLAYING = True
+
+# Code to create food in random location
+
+
+def spawn_food(snake, box):
+    food = None
+
+    while food is None:
+        food = [random.randint(box[0][0] + 1, box[1][0] - 1)]
+        random.randint(box[0][1] + 1, box[1][1] - 1)
+
+        if food in snake:
+            food = None
+        return food
 
 # Create window
 
@@ -25,6 +41,9 @@ def main(stdscr):
 
     for y, x in snake:
         stdscr.addstr(y, x, '=')
+
+    food = spawn_food(snake, box)
+    stdscr.addstr(y, x, '*')
 
     stdscr.getch()
 
@@ -58,6 +77,15 @@ def main(stdscr):
         stdscr.addstr(snake[-1][0], snake[-1][1], ' ')
         snake.pop()
 
+        # Increases the size of the snake when food is eaten
+
+        if snake[0] == food:
+            food = spawn_food(snake, box)
+            stdscr.addstr(y, x, '*')
+        else:
+            stdscr.addstr(snake[-1][0], snake[-1][1], ' ')
+            snake.pop()
+
         # Logic for Game Over conditions
         if (snake[0][0] in [box[0][0], box[1][0]] or
             snake[0][1] in [box[0][1], box[1][1]] or
@@ -74,7 +102,6 @@ def main(stdscr):
 
 curses.wrapper(main)
 
-# Food
 
 # Keeping Score
 
