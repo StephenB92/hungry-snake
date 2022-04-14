@@ -9,19 +9,20 @@ import random
 
 PLAYING = True
 
-# Code to create food in random location
-
 
 def spawn_food(snake, box):
+    """
+    This function generates food at random places
+    on the board
+    """
     food = None
 
     while food is None:
-        food = [random.randint(box[0][0] + 1, box[1][0] - 1)]
-        random.randint(box[0][1] + 1, box[1][1] - 1)
-
+        food = [random.randint(box[0][0] + 1, box[1][0] - 1),
+                random.randint(box[0][1] + 1, box[1][1] - 1)]
         if food in snake:
             food = None
-        return food
+    return food
 
 # Create window
 
@@ -31,6 +32,8 @@ def main(stdscr):
     Code to create the game board
     """
     curses.curs_set(0)
+    # stdscr.nodelay(1)
+    # stdscr.timeout(100)
     height, width = stdscr.getmaxyx()
     box = [[3, 3], [height-3, width-3]]
     textpad.rectangle(stdscr, box[0][0], box[0][1], box[1][0], box[1][1])
@@ -38,14 +41,16 @@ def main(stdscr):
     snake = [[height // 2, width // 2 + 1], [height // 2, width // 2],
              [height // 2, width // 2 - 1]]
     direction = curses.KEY_RIGHT
-
+    # Creating the snake
     for y, x in snake:
         stdscr.addstr(y, x, '=')
-
+    # Creating the food
     food = spawn_food(snake, box)
-    stdscr.addstr(y, x, '*')
-
-    stdscr.getch()
+    stdscr.addstr(food[0], food[1], '*')
+    # Displays the user's score
+    score = 0
+    score_text = f"Score: {score}"
+    stdscr.addstr(0, width // 2 - len(score_text) // 2, score_text)
 
     # Allowing user key presses to control the snake
     while PLAYING is True:
@@ -74,14 +79,14 @@ def main(stdscr):
         snake.insert(0, new_head)
         stdscr.addstr(new_head[0], new_head[1], '=')
 
-        stdscr.addstr(snake[-1][0], snake[-1][1], ' ')
-        snake.pop()
-
         # Increases the size of the snake when food is eaten
 
         if snake[0] == food:
             food = spawn_food(snake, box)
-            stdscr.addstr(y, x, '*')
+            stdscr.addstr(food[0], food[1], '*')
+            score += 1
+            score_text = f"Score: {score}"
+            stdscr.addstr(0, width // 2 - len(score_text) // 2, score_text)
         else:
             stdscr.addstr(snake[-1][0], snake[-1][1], ' ')
             snake.pop()
