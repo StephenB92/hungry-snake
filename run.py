@@ -2,9 +2,8 @@
 The curses module is used to handle user keypresses,
 allowing them to move the snake. The  random module
 is used to randomly generate where food will appear.
-The time module is used to make the snake continue in
-the direction of the last direction key pressed by the
-user, until they press another direction key.
+The time module is used to time out the game over screen
+and game window.
 """
 import curses
 import random
@@ -75,7 +74,7 @@ while True:
     next_key = win.getch()
 
     if next_key == -1:
-        key = key
+        key = win.getch()
     else:
         key = next_key
 
@@ -123,6 +122,8 @@ while True:
             collision_with_self(snake_position) == 1):
         break
 
+
+sc.addstr(f"Game Over. You helped the snake eat {score} pieces of food!")
 sc.refresh()
 time.sleep(2)
 curses.endwin()
