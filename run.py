@@ -12,8 +12,9 @@ import time
 
 # Initialise the screen
 sc = curses.initscr()
-height, width = sc.getmaxyx()
+height, width = 30, 60
 win = curses.newwin(height, width, 0, 0)
+
 win.keypad(1)  # Allows user key presses to be recognised
 curses.curs_set(0)
 
@@ -21,24 +22,60 @@ curses.curs_set(0)
 snake_head = [10, 15]
 snake_position = [[15, 10], [14, 10], [13, 10]]
 food_position = [20, 20]
-SCORE = 0
+score = 0
 
 # display food
-# win.addch(food_position[0], food_position[1], curses.ACS_DIAMOND)
+win.addch(food_position[0], food_position[1], '*')
 
 PREV_BUTTON_DIRECTION = 1
 BUTTON_DIRECTION = 1
 key = curses.KEY_RIGHT
 
 
+def collect_food(score):
+    """
+    This function increases the users score when food is
+    collected and randomly generates the next piece of food
+    """
+    food_position = [random.randint(1, height - 2),
+                     random.randint(1, width - 2)]
+    score += 1
+    return food_position, score
+
+
+def collision_with_boundaries(snake_head):
+    """
+    This function detects when the snake head touches
+    the edges of the screen
+    """
+    if (snake_head[0] >= height - 1 or snake_head[0] <= 0 or
+            snake_head[1] >= width - 1 or snake_head[1] <= 0):
+        return 1
+    else:
+        return 0
+
+
+def collision_with_self(snake_position):
+    """
+    This function detects when the snake head touches
+    another part of the snake
+    """
+    snake_head = snake_position[0]
+    if snake_head in snake_position[1:]:
+        return 1
+    else:
+        return 0
+
+
 a = []
 while True:
     win.border(0)
     win.timeout(100)
+
     next_key = win.getch()
 
     if next_key == -1:
-        key = win.getch()
+        key = key
     else:
         key = next_key
 
@@ -66,10 +103,28 @@ while True:
     elif BUTTON_DIRECTION == 3:
         snake_head[0] -= 1
 
+    # Increase Snake length on eating food
+    if snake_head == food_position:
+        food_position, score = collect_food(score)
+        snake_position.insert(0, list(snake_head))
+        a.append(food_position)
+        win.addch(food_position[0], food_position[1], '*')
+
+    else:
+        snake_position.insert(0, list(snake_head))
+        last = snake_position.pop()
+        win.addch(last[0], last[1], ' ')
+
     # Display Snake
-    win.addch(snake_position[0][0], snake_position[0][1], '#')
+    win.addch(snake_position[0][0], snake_position[0][1], '=')
+
+    # Game Over Conditions
+    if (collision_with_boundaries(snake_head) == 1 or
+            collision_with_self(snake_position) == 1):
+        break
 
 sc.refresh()
 time.sleep(2)
 curses.endwin()
 print(a)
+print(width, height)

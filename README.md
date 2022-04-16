@@ -37,7 +37,7 @@ Hungry Snake is intended to be picked up and played by anyone! The aim of the ga
 
 ## Bugs and Fixes
 
-1. I had been having a significant issue while developing this project in programming the snake to move automatically in the direction of the last directional button the user pressed, until the next direction is pressed. Of course, this is a fundamental aspect of the game. In the initial incarnation of the project, the snake could only be moved manually as the user presses directional keys, effectively removing any difficulty from the game as users could just control the snake space by space. This led to me having to overhaul the code and use a different template to start with. 
+1. I had been having a significant issue while developing this project in programming the snake to move automatically in the direction of the last directional button the user pressed, until the next direction is pressed. Of course, this is a fundamental aspect of the game. In the initial incarnation of the project, the snake could only be moved manually as the user presses directional keys, effectively removing any difficulty from the game as users could just control the snake space by space. This led to me having to overhaul the code and use a different template to start with. While this was not ideal due to the impending deadline, the change was successful and the base game now runs as intended. Credit to the tutorial from The AI Learner below.
 
 ## Deployment
 
