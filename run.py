@@ -10,9 +10,9 @@ import random
 import time
 
 # Credit to The AI Learner and the article "Snake Game using Python Curses"
-# For code and logic used as this projects template.
+# For code and logic used as this projects template
 
-# Initialise the screen
+# Initialise the screen using curses module
 sc = curses.initscr()
 height, width = 20, 80
 win = curses.newwin(height, width, 0, 0)
@@ -22,21 +22,21 @@ curses.noecho()  # Prevents user key presses registering on terminal window
 # Starting snake and food positions
 snake_head = [10, 15]
 snake_position = [[15, 10], [14, 10], [13, 10]]
-food_position = [18, 18]
+food_position = [5, 60]
 
 SCORE = 0
 
-# Display food
+# Display food using curses
 win.addch(food_position[0], food_position[1], '*')
 
-# Initial key press values
+# Initial key press values using curses
 PREV_BUTTON_DIRECTION = 1
 BUTTON_DIRECTION = 1
 KEY = curses.KEY_RIGHT
 PREV_KEY = KEY
 
 # Credit to The AI Learner and the article "Snake Game using Python Curses"
-# For code and logic used as this projects template.
+# For code and logic used as this projects template
 
 
 def collect_food(SCORE):
@@ -44,6 +44,8 @@ def collect_food(SCORE):
     This function increases the users score when food is
     collected and randomly generates the next piece of food
     """
+    # The random module is used here to generate where
+    # the next food will appear
     food_position = [random.randint(1, height - 2),
                      random.randint(1, width - 2)]
     SCORE += 1
@@ -74,9 +76,9 @@ def collision_with_self(snake_position):
         return 0
 
 
-# Main game loop
+# Main game loop using curses where necessary
 # Credit to The AI Learner and the article "Snake Game using Python Curses"
-# For code and logic used as this projects template.
+# For code and logic used as this projects template
 a = []
 # Credit to sanchitgangwar on Github, for the code to make the
 # while loop dependent on the ESC key being pressed
@@ -84,15 +86,9 @@ while KEY != 27:  # Ensures that the game runs until ESC is pressed
     win.border(0)
     win.timeout(100)
 
-    next_key = win.getch()
-    # If statement allowing control of snake
-    if next_key == -1:
-        KEY = win.getch()
-    else:
-        KEY = next_key
     # If statement that handles "Pause" feature
     # Credit to sanchitgangwar on Github,
-    # for code used for the pause game feature.
+    # for code used for the pause game feature
     if KEY == ord(' '):
         KEY = - 1
         while KEY != ord(' '):
@@ -105,6 +101,13 @@ while KEY != 27:  # Ensures that the game runs until ESC is pressed
         KEY = PREV_KEY
         win.addstr(height // 2, width // 2 - len(pause) // 2, "       ")
         continue
+
+    next_key = win.getch()
+    # If statement allowing control of snake
+    if next_key == -1:
+        KEY = win.getch()
+    else:
+        KEY = next_key
 
     # 0 = Left, 1 = Right, 3 = Up, 2 = Down
     # If statement controlling snake movement and preventing users

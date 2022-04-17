@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Hungry Snake - The classic mobile game makes it's way to the Python Command Line Interface and Code Institute mock terminal on Heroku!! Control the snake to eat food and grow as big as you can to earn more points. The game is over if the snake runs into the edge of the screen or eats it's own tail!
+Hungry Snake - The classic mobile game makes it's way to the Python Command Line Interface and Code Institute mock terminal on Heroku!! Control the snake to eat food and grow as big as you can to earn more points. The game is over if the snake runs into the edge of the screen or it's own tail!
 
 Please find the live version of the game [here](https://python-portfolio-project.herokuapp.com/).
 
@@ -18,6 +18,12 @@ I want a game I can pick up and play that doesn't take too much time. Snake is p
 
 1. Python
 
+### Modules Used
+
+- The curses module has been imported to allow the terminal to be animated to create the game window. Curses can also handle user key presses and interact with the screen as a result of that input, thereby moving the snake around the game window.
+- The random module has been imported and is used to randomly generate where the food items will appear on the window.
+- The time module has been imported and is used to timeout the game over screen.
+
 ## Wireframes
 
 1. Please see wireframe for the game on initialisation [here](assets/wireframes/main-game.png).
@@ -29,11 +35,17 @@ I want a game I can pick up and play that doesn't take too much time. Snake is p
 ### Existing Features
 
 1. Controlling the Snake. As soon as the game loads, the initial piece of food is created and users must use the directional buttons on their keyboard to steer the snake towards it.
+
 ![Main Game Screenshot](assets/screenshots/main-game.png)
+
 2. Collision detection. As per the rules of the classic game, the game is over if the snake runs into the edge of the screen or into itself. The game has been coded to react to these instances when they occur and end the game when they do. When this happens, the game ends and a message appears telling the user how many pieces of food they obtained.
+
 ![Game Over Screenshot](assets/screenshots/game-over.png)
+
 3. Pause button. The user can pause the game at any point by pressing the space key. No other key presses (including "ESC") will register on the program until the space key is pressed again.
+
 ![Pause Game Screenshot](assets/screenshots/pause-game.png)
+
 4. Quit game. The user can quit the game and end the programme at any time by pressing the Escape key. This game is programmed to run as a "While Loop" that runs only while the key pressed by the user is NOT the escape key. Once pressed, the loop and game are closed.
 
 ### Future Features
@@ -86,7 +98,7 @@ This project was deployed using Code Institute's mock terminal for Heroku. At th
 4. In the Command Line Interface on GitPod, typed the command "heroku login -i" and logged in using my email and password in the Command Line Interface.
 5. Got my app name from Heroku by typing in the command "heroku apps".
 6. Set the heroku remote by typing heroku "git:remote -a python-portfolio-project".
-7. Add and commit to GitHub and Heroku by typing "git add . && git commit -m "Deploy to Heroku cia CLI"".
+7. Add and commit to GitHub and Heroku by typing "git add . && git commit -m "Deploy to Heroku via CLI"".
 8. Pushed to both GitHub and Heroku by typing "git push origin main" and "git push heroku main".
 
 ## Credits
