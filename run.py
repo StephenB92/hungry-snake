@@ -22,26 +22,26 @@ curses.noecho()
 snake_head = [10, 15]
 snake_position = [[15, 10], [14, 10], [13, 10]]
 food_position = [20, 20]
-score = 0
+SCORE = 0
 
 # display food
 win.addch(food_position[0], food_position[1], '*')
 
 PREV_BUTTON_DIRECTION = 1
 BUTTON_DIRECTION = 1
-key = curses.KEY_RIGHT
-prev_key = key
+KEY = curses.KEY_RIGHT
+PREV_KEY = KEY
 
 
-def collect_food(score):
+def collect_food(SCORE):
     """
     This function increases the users score when food is
     collected and randomly generates the next piece of food
     """
     food_position = [random.randint(1, height - 2),
                      random.randint(1, width - 2)]
-    score += 1
-    return food_position, score
+    SCORE += 1
+    return food_position, SCORE
 
 
 def collision_with_boundaries(snake_head):
@@ -69,32 +69,32 @@ def collision_with_self(snake_position):
 
 
 a = []
-while key != 27:
+while KEY != 27:
     win.border(0)
     win.timeout(100)
 
     next_key = win.getch()
 
     if next_key == -1:
-        key = win.getch()
+        KEY = win.getch()
     else:
-        key = next_key
+        KEY = next_key
 
-    if key == ord(' '):
-        key = - 1
-        while key != ord(' '):
+    if KEY == ord(' '):
+        KEY = - 1
+        while KEY != ord(' '):
             key = win.getch()
-        key = prev_key
+        KEY = PREV_KEY
         continue
 
     # 0 = Left, 1 = Right, 3 = Up, 2 = Down
-    if key == curses.KEY_LEFT and PREV_BUTTON_DIRECTION != 1:
+    if KEY == curses.KEY_LEFT and PREV_BUTTON_DIRECTION != 1:
         BUTTON_DIRECTION = 0
-    elif key == curses.KEY_RIGHT and PREV_BUTTON_DIRECTION != 0:
+    elif KEY == curses.KEY_RIGHT and PREV_BUTTON_DIRECTION != 0:
         BUTTON_DIRECTION = 1
-    elif key == curses.KEY_UP and PREV_BUTTON_DIRECTION != 2:
+    elif KEY == curses.KEY_UP and PREV_BUTTON_DIRECTION != 2:
         BUTTON_DIRECTION = 3
-    elif key == curses.KEY_DOWN and PREV_BUTTON_DIRECTION != 3:
+    elif KEY == curses.KEY_DOWN and PREV_BUTTON_DIRECTION != 3:
         BUTTON_DIRECTION = 2
     else:
         pass
@@ -113,7 +113,7 @@ while key != 27:
 
     # Increase Snake length on eating food
     if snake_head == food_position:
-        food_position, score = collect_food(score)
+        food_position, SCORE = collect_food(SCORE)
         snake_position.insert(0, list(snake_head))
         a.append(food_position)
         win.addch(food_position[0], food_position[1], '*')
@@ -132,7 +132,7 @@ while key != 27:
         break
 
 
-sc.addstr(f"Game Over. You helped the snake eat {score} piece(s) of food!")
+sc.addstr(f"Game Over. You helped the snake eat {SCORE} piece(s) of food!")
 sc.refresh()
 time.sleep(2)
 curses.endwin()
