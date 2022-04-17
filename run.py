@@ -15,7 +15,8 @@ height, width = 30, 60
 win = curses.newwin(height, width, 0, 0)
 
 win.keypad(1)  # Allows user key presses to be recognised
-curses.curs_set(0)
+# curses.curs_set(0)
+curses.noecho()
 
 # Starting snake and food positions
 snake_head = [10, 15]
@@ -29,6 +30,7 @@ win.addch(food_position[0], food_position[1], '*')
 PREV_BUTTON_DIRECTION = 1
 BUTTON_DIRECTION = 1
 key = curses.KEY_RIGHT
+prev_key = key
 
 
 def collect_food(score):
@@ -67,7 +69,7 @@ def collision_with_self(snake_position):
 
 
 a = []
-while True:
+while key != 27:
     win.border(0)
     win.timeout(100)
 
@@ -77,6 +79,13 @@ while True:
         key = win.getch()
     else:
         key = next_key
+
+    if key == ord(' '):
+        key = - 1
+        while key != ord(' '):
+            key = win.getch()
+        key = prev_key
+        continue
 
     # 0 = Left, 1 = Right, 3 = Up, 2 = Down
     if key == curses.KEY_LEFT and PREV_BUTTON_DIRECTION != 1:
@@ -123,7 +132,7 @@ while True:
         break
 
 
-sc.addstr(f"Game Over. You helped the snake eat {score} pieces of food!")
+sc.addstr(f"Game Over. You helped the snake eat {score} piece(s) of food!")
 sc.refresh()
 time.sleep(2)
 curses.endwin()
